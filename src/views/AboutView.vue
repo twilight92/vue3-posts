@@ -5,6 +5,11 @@
   </div>
 </template>
 
-<script></script>
+<script setup>
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+console.log("route.path: ", route.path);
+</script>
 
 <style lang="scss" scoped></style>
