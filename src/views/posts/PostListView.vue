@@ -17,6 +17,7 @@
 
 <script setup>
 import PostItem from "@/components/posts/PostItem.vue";
+import PostDetailView from "@/views/posts/PostDetailView.vue";
 import { getPosts } from "@/api/posts";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
