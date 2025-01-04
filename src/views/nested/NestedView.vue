@@ -19,7 +19,7 @@
       </li>
     </ul>
     <hr class="my-4" />
-    <RouterView></RouterView>
+    <router-view></router-view>
   </div>
 </template>
 
