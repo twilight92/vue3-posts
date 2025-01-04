@@ -12,6 +12,8 @@
         ></post-item>
       </div>
     </div>
+    <hr class="my-4" />
+    <post-detail-view id="1"></post-detail-view>
   </div>
 </template>
 
