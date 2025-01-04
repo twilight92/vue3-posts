@@ -2,11 +2,34 @@
   <div>
     <h2>게시글 목록</h2>
     <hr class="my-4" />
+    <div class="row g-3">
+      <div class="col-4">
+        <post-item
+          title="제목"
+          content="내용"
+          created-at="2020-01-01"
+        ></post-item>
+      </div>
+      <div class="col-4">
+        <post-item
+          title="제목"
+          content="내용"
+          created-at="2020-01-01"
+        ></post-item>
+      </div>
+      <div class="col-4">
+        <post-item
+          title="제목"
+          content="내용"
+          created-at="2020-01-01"
+        ></post-item>
+      </div>
+    </div>
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import PostItem from "@/components/posts/PostItem.vue";
 </script>
 
 <style lang="scss" scoped></style>
