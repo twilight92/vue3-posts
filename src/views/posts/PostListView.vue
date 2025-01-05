@@ -32,6 +32,7 @@ const posts = ref([]);
 const params = ref({
   _sort: "createdAt",
   _order: "desc",
+  _limit: 3,
 });
 
 const fetchPosts = async () => {
