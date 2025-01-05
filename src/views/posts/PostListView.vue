@@ -7,6 +7,13 @@
         <div class="col">
           <input v-model="params.title_like" type="text" class="form-control" />
         </div>
+        <div class="col">
+          <select v-model="params._limit" class="form-select">
+            <option value="3">3개씩 보기</option>
+            <option value="6">6개씩 보기</option>
+            <option value="9">9개씩 보기</option>
+          </select>
+        </div>
       </div>
     </form>
     <hr class="my-4" />
