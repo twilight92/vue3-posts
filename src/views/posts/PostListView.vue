@@ -14,7 +14,7 @@
     </div>
     <nav class="my-5" aria-label="...">
       <ul class="pagination justify-content-center">
-        <li class="page-item">
+        <li class="page-item" :class="{ disabled: !(params._page > 1) }">
           <span class="page-link" @click.prevent="--params._page"
             >Previous</span
           >
@@ -29,7 +29,10 @@
             page
           }}</a>
         </li>
-        <li class="page-item">
+        <li
+          class="page-item"
+          :class="{ disabled: !(params._page < pageCount) }"
+        >
           <a class="page-link" href="#" @click.prevent="++params._page">Next</a>
         </li>
       </ul>
