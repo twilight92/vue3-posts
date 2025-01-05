@@ -17,11 +17,16 @@
         <li class="page-item disabled">
           <span class="page-link">Previous</span>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active" aria-current="page">
-          <span class="page-link">2</span>
+        <li
+          v-for="page in pageCount"
+          :key="page"
+          class="page-item"
+          :class="{ active: params._page === page }"
+        >
+          <a class="page-link" href="#" @click.prevent="params._page = page">{{
+            page
+          }}</a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
         <li class="page-item">
           <a class="page-link" href="#">Next</a>
         </li>
@@ -51,13 +56,16 @@ const params = ref({
   _limit: 3,
 });
 // pagination
-
 const totalCount = ref(0);
+const pageCount = computed(() =>
+  Math.ceil(totalCount.value / params.value._limit)
+);
 
 const fetchPosts = async () => {
   try {
-    const { data } = await getPosts(params.value);
+    const { data, headers } = await getPosts(params.value);
     posts.value = data;
+    totalCount.value = headers["x-total-count"];
   } catch (error) {
     console.error(error);
   }
