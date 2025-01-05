@@ -31,7 +31,14 @@ const router = useRouter();
 const posts = ref([]);
 
 const fetchPosts = () => {
-  posts.value = getPosts();
+  // posts.value = getPosts();
+  getPosts()
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 fetchPosts();
 const goPage = (id) => {
