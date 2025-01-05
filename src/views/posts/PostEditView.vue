@@ -49,8 +49,12 @@ const form = ref({
   content: null,
 });
 const fetchPost = async () => {
-  const { data } = await getPostById(id);
-  setForm(data);
+  try {
+    const { data } = await getPostById(id);
+    setForm(data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 const setForm = ({ title, content, createdAt }) => {
   form.value.title = title;
