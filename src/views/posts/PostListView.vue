@@ -31,9 +31,8 @@ const router = useRouter();
 const posts = ref([]);
 
 const fetchPosts = async () => {
-  // posts.value = getPosts();
   const { data } = await getPosts();
-  console.dir(data);
+  posts.value = data;
 };
 fetchPosts();
 const goPage = (id) => {
