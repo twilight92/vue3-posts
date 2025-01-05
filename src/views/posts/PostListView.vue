@@ -29,10 +29,14 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const posts = ref([]);
+const params = ref({
+  _sort: "createdAt",
+  _order: "desc",
+});
 
 const fetchPosts = async () => {
   try {
-    const { data } = await getPosts();
+    const { data } = await getPosts(params.value);
     posts.value = data;
   } catch (error) {
     console.error(error);
