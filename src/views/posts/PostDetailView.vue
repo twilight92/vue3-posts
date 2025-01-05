@@ -52,8 +52,10 @@ const setPost = ({ title, content, createdAt }) => {
 fetchPost();
 const remove = async () => {
   try {
-    await deletePost(props.id);
-    router.push({ name: "PostList" });
+    if (confirm("삭제할거임?")) {
+      await deletePost(props.id);
+      router.push({ name: "PostList" });
+    }
   } catch (error) {
     console.error(error);
   }
