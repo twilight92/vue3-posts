@@ -14,8 +14,10 @@
     </div>
     <nav class="my-5" aria-label="...">
       <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <span class="page-link">Previous</span>
+        <li class="page-item">
+          <span class="page-link" @click.prevent="--params._page"
+            >Previous</span
+          >
         </li>
         <li
           v-for="page in pageCount"
@@ -28,7 +30,7 @@
           }}</a>
         </li>
         <li class="page-item">
-          <a class="page-link" href="#">Next</a>
+          <a class="page-link" href="#" @click.prevent="++params._page">Next</a>
         </li>
       </ul>
     </nav>
