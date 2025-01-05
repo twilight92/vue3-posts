@@ -41,8 +41,12 @@ const router = useRouter();
 const post = ref({});
 
 const fetchPost = async () => {
-  const { data } = await getPostById(props.id);
-  setPost(data);
+  try {
+    const { data } = await getPostById(props.id);
+    setPost(data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 const setPost = ({ title, content, createdAt }) => {
   post.value.title = title;
