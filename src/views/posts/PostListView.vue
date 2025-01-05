@@ -12,7 +12,22 @@
         ></post-item>
       </div>
     </div>
-    <hr class="my-4" />
+    <nav class="my-5" aria-label="...">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <span class="page-link">Previous</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">2</span>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+    <hr class="my-5" />
     <app-card>
       <post-detail-view :id="1"></post-detail-view>
     </app-card>
@@ -34,6 +49,9 @@ const params = ref({
   _order: "desc",
   _limit: 3,
 });
+// pagination
+
+const totalCount = ref(0);
 
 const fetchPosts = async () => {
   try {
