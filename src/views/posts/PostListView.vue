@@ -32,7 +32,8 @@ const posts = ref([]);
 
 const fetchPosts = async () => {
   // posts.value = getPosts();
-  const response = await getPosts();
+  const { data } = await getPosts();
+  console.dir(data);
 };
 fetchPosts();
 const goPage = (id) => {
