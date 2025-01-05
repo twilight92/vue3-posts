@@ -44,7 +44,7 @@ import PostItem from "@/components/posts/PostItem.vue";
 import PostDetailView from "@/views/posts/PostDetailView.vue";
 import AppCard from "@/components/AppCard.vue";
 import { getPosts } from "@/api/posts";
-import { ref } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -70,7 +70,8 @@ const fetchPosts = async () => {
     console.error(error);
   }
 };
-fetchPosts();
+// fetchPosts();
+watchEffect(fetchPosts);
 const goPage = (id) => {
   // router.push(`/posts/${id}`);
   router.push({
