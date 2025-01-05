@@ -19,18 +19,6 @@
       "createdAt": "2020-03-01"
     },
     {
-      "id": 4,
-      "title": "제목4",
-      "contents": "내용4",
-      "createdAt": "2020-04-01"
-    },
-    {
-      "id": 5,
-      "title": "제목5",
-      "contents": "내용5",
-      "createdAt": "2020-05-01"
-    },
-    {
       "title": "오늘의 테스트~",
       "content": "짜잔~ 짜잔~ 짜잔~ ",
       "id": 6

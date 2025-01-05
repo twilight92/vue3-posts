@@ -21,7 +21,7 @@
         </button>
       </div>
       <div class="col-auto">
-        <button class="btn btn-outline-danger">삭제</button>
+        <button class="btn btn-outline-danger" @click="remove">삭제</button>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { getPostById } from "@/api/posts";
+import { getPostById, deletePost } from "@/api/posts";
 import { ref } from "vue";
 
 const props = defineProps({
@@ -50,6 +50,14 @@ const setPost = ({ title, content, createdAt }) => {
   post.value.createdAt = createdAt;
 };
 fetchPost();
+const remove = async () => {
+  try {
+    await deletePost(props.id);
+    router.push({ name: "PostList" });
+  } catch (error) {
+    console.error(error);
+  }
+};
 const goListPage = () => {
   router.push({
     name: "PostList",
