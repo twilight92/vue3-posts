@@ -27,31 +27,11 @@
         ></post-item>
       </div>
     </div>
-    <nav class="my-5" aria-label="...">
-      <ul class="pagination justify-content-center">
-        <li class="page-item" :class="{ disabled: !(params._page > 1) }">
-          <span class="page-link" @click.prevent="--params._page"
-            >Previous</span
-          >
-        </li>
-        <li
-          v-for="page in pageCount"
-          :key="page"
-          class="page-item"
-          :class="{ active: params._page === page }"
-        >
-          <a class="page-link" href="#" @click.prevent="params._page = page">{{
-            page
-          }}</a>
-        </li>
-        <li
-          class="page-item"
-          :class="{ disabled: !(params._page < pageCount) }"
-        >
-          <a class="page-link" href="#" @click.prevent="++params._page">Next</a>
-        </li>
-      </ul>
-    </nav>
+    <app-pagination
+      :current-page="params._page"
+      :page-count="pageCount"
+      @page="(page) => (params._page = page)"
+    />
     <hr class="my-5" />
     <app-card>
       <post-detail-view :id="1"></post-detail-view>
@@ -62,6 +42,7 @@
 <script setup>
 import PostItem from "@/components/posts/PostItem.vue";
 import PostDetailView from "@/views/posts/PostDetailView.vue";
+import AppPagination from "@/components/AppPagination.vue";
 import AppCard from "@/components/AppCard.vue";
 import { getPosts } from "@/api/posts";
 import { computed, ref, watchEffect } from "vue";
