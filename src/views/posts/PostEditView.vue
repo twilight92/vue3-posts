@@ -8,16 +8,14 @@
       @submit.prevent="edit"
     >
       <template #actions>
-        <div class="pt-4">
-          <button
-            type="button"
-            class="btn btn-outline-danger me-2"
-            @click="goDetailPage"
-          >
-            취소
-          </button>
-          <button class="btn btn-primary">수정</button>
-        </div>
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          @click="goDetailPage"
+        >
+          취소
+        </button>
+        <button class="btn btn-primary">수정</button>
       </template>
     </post-form>
   </div>
