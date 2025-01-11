@@ -44,7 +44,7 @@ const fetchPost = async () => {
     setForm(data);
   } catch (error) {
     console.error(error);
-    vAlert("네트워크 오류");
+    vAlert(error.message);
   }
 };
 const setForm = ({ title, content, createdAt }) => {
@@ -67,7 +67,7 @@ const edit = async () => {
     vAlert("수정이 완료되었습니다", "success");
   } catch (error) {
     console.error(error);
-    vAlert("수정 실패");
+    vAlert(error.message);
   }
 };
 
