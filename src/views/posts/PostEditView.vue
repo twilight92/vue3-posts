@@ -71,15 +71,10 @@ const edit = async () => {
   }
 };
 
-// alert
-// const showAlert = ref(false);
-// const alertMessage = ref("false");
-// const alertType = ref("");
 const alerts = ref([]);
 const vAlert = (message, type = "error") => {
   alerts.value.push({ message, type });
   setTimeout(() => {
-    // showAlert.value = false;
     alerts.value.shift();
   }, 2000);
 };
