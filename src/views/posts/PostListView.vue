@@ -2,31 +2,21 @@
   <div>
     <h2>게시글 목록</h2>
     <hr class="my-4" />
-    <form @submit.prevent>
-      <div class="row g-3">
-        <div class="col">
-          <input v-model="params.title_like" type="text" class="form-control" />
-        </div>
-        <div class="col">
-          <select v-model="params._limit" class="form-select">
-            <option value="3">3개씩 보기</option>
-            <option value="6">6개씩 보기</option>
-            <option value="9">9개씩 보기</option>
-          </select>
-        </div>
-      </div>
-    </form>
+    <post-filter
+      v-model:title="params.title_like"
+      v-model:limit="params._limit"
+    />
     <hr class="my-4" />
-    <div class="row g-3">
-      <div v-for="post in posts" :key="post.id" class="col-4">
+    <app-grid :items="posts">
+      <template v-slot="{ item }">
         <post-item
-          :title="post.title"
-          :content="post.content"
-          :created-at="post.createdAt"
-          @click="goPage(post.id)"
+          :title="item.title"
+          :content="item.content"
+          :created-at="item.createdAt"
+          @click="goPage(item.id)"
         ></post-item>
-      </div>
-    </div>
+      </template>
+    </app-grid>
     <app-pagination
       :current-page="params._page"
       :page-count="pageCount"
@@ -42,8 +32,10 @@
 <script setup>
 import PostItem from "@/components/posts/PostItem.vue";
 import PostDetailView from "@/views/posts/PostDetailView.vue";
+import PostFilter from "@/views/posts/PostFilter.vue";
 import AppPagination from "@/components/AppPagination.vue";
 import AppCard from "@/components/AppCard.vue";
+import AppGrid from "@/components/AppGrid.vue";
 import { getPosts } from "@/api/posts";
 import { computed, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
