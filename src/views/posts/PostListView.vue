@@ -6,12 +6,14 @@
       v-model:title="params.title_like"
       v-model:limit="params._limit"
     />
-    <post-modal
-      v-model="show"
-      :title="modalTitle"
-      :content="modalContent"
-      :created-at="modalCreatedAt"
-    />
+    <teleport to="#modal">
+      <post-modal
+        v-model="show"
+        :title="modalTitle"
+        :content="modalContent"
+        :created-at="modalCreatedAt"
+      />
+    </teleport>
     <hr class="my-4" />
     <app-grid :items="posts">
       <template v-slot="{ item }">
