@@ -6,6 +6,33 @@
       v-model:title="params.title_like"
       v-model:limit="params._limit"
     />
+
+    <hr class="my-4" />
+
+    <app-loading v-if="loading" />
+
+    <app-error v-else-if="error" :message="error.message" />
+
+    <template v-else>
+      <app-grid :items="posts">
+        <template v-slot="{ item }">
+          <post-item
+            :title="item.title"
+            :content="item.content"
+            :created-at="item.createdAt"
+            @click="goPage(item.id)"
+            @modal="openModal(item)"
+          ></post-item>
+        </template>
+      </app-grid>
+
+      <app-pagination
+        :current-page="params._page"
+        :page-count="pageCount"
+        @page="(page) => (params._page = page)"
+      />
+    </template>
+
     <teleport to="#modal">
       <post-modal
         v-model="show"
@@ -15,22 +42,7 @@
       />
     </teleport>
     <hr class="my-4" />
-    <app-grid :items="posts">
-      <template v-slot="{ item }">
-        <post-item
-          :title="item.title"
-          :content="item.content"
-          :created-at="item.createdAt"
-          @click="goPage(item.id)"
-          @modal="openModal(item)"
-        ></post-item>
-      </template>
-    </app-grid>
-    <app-pagination
-      :current-page="params._page"
-      :page-count="pageCount"
-      @page="(page) => (params._page = page)"
-    />
+
     <hr class="my-5" />
     <app-card>
       <post-detail-view :id="1"></post-detail-view>
@@ -49,6 +61,8 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const posts = ref([]);
+const error = ref(null);
+const loading = ref(false);
 const params = ref({
   _sort: "createdAt",
   _order: "desc",
@@ -64,11 +78,14 @@ const pageCount = computed(() =>
 
 const fetchPosts = async () => {
   try {
+    loading.value = true;
     const { data, headers } = await getPosts(params.value);
     posts.value = data;
     totalCount.value = headers["x-total-count"];
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    error.value = err;
+  } finally {
+    loading.value = false;
   }
 };
 // fetchPosts();
