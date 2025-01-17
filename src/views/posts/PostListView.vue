@@ -55,8 +55,7 @@ import PostItem from "@/components/posts/PostItem.vue";
 import PostDetailView from "@/views/posts/PostDetailView.vue";
 import PostFilter from "@/views/posts/PostFilter.vue";
 import PostModal from "@/views/posts/PostModal.vue";
-import { getPosts } from "@/api/posts";
-import { computed, ref, watchEffect } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAxios } from "@/hooks/useAxios";
 
@@ -82,20 +81,6 @@ const pageCount = computed(() =>
   Math.ceil(totalCount.value / params.value._limit)
 );
 
-// const fetchPosts = async () => {
-//   try {
-//     loading.value = true;
-//     const { data, headers } = await getPosts(params.value);
-//     posts.value = data;
-//     totalCount.value = headers["x-total-count"];
-//   } catch (err) {
-//     error.value = err;
-//   } finally {
-//     loading.value = false;
-//   }
-// };
-// fetchPosts();
-// watchEffect(fetchPosts);
 const goPage = (id) => {
   // router.push(`/posts/${id}`);
   router.push({

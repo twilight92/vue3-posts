@@ -43,37 +43,14 @@ import { useRoute, useRouter } from "vue-router";
 import { getPostById, updatePost } from "@/api/posts";
 import PostForm from "@/components/posts/PostForm.vue";
 import { useAlert } from "@/composables/alert";
+import { useAxios } from "@/hooks/useAxios";
 
 const { vAlert, vSuccess } = useAlert();
 
 const route = useRoute();
 const router = useRouter();
 const id = route.params.id;
-
-const form = ref({
-  title: null,
-  content: null,
-});
-const loading = ref(false);
-const error = ref(null);
-const fetchPost = async () => {
-  try {
-    loading.value = true;
-    const { data } = await getPostById(id);
-    setForm(data);
-  } catch (err) {
-    error.value = err;
-    vAlert(err.value.message);
-  } finally {
-    loading.value = false;
-  }
-};
-const setForm = ({ title, content, createdAt }) => {
-  form.value.title = title;
-  form.value.content = content;
-  form.value.createdAt = createdAt;
-};
-fetchPost();
+const { error, loading, data: form } = useAxios(`/posts/${id}`);
 
 const goDetailPage = () => {
   router.push({

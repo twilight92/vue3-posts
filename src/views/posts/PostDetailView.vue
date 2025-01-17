@@ -49,8 +49,9 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { getPostById, deletePost } from "@/api/posts";
+import { deletePost } from "@/api/posts";
 import { ref } from "vue";
+import { useAxios } from "@/hooks/useAxios";
 
 const props = defineProps({
   id: String,
@@ -58,27 +59,8 @@ const props = defineProps({
 
 const router = useRouter();
 // const id = route.params.id;
-const post = ref({});
-const error = ref(null);
-const loading = ref(false);
 
-const fetchPost = async () => {
-  try {
-    loading.value = true;
-    const { data } = await getPostById(String(props.id));
-    setPost(data);
-  } catch (err) {
-    error.value = err;
-  } finally {
-    loading.value = false;
-  }
-};
-const setPost = ({ title, content, createdAt }) => {
-  post.value.title = title;
-  post.value.content = content;
-  post.value.createdAt = createdAt;
-};
-fetchPost();
+const { error, loading, data: post } = useAxios(`/posts/${props.id}`);
 
 const removeError = ref(null);
 const removeLoading = ref(false);
