@@ -14,6 +14,10 @@
 
     <app-error v-else-if="error" :message="error.message" />
 
+    <template v-else-if="!isExist">
+      <p class="text-center py-5 text-muted">결과 없음</p>
+    </template>
+
     <template v-else>
       <app-grid :items="posts">
         <template v-slot="{ item }">
@@ -87,7 +91,7 @@ const {
   error,
   loading,
 } = useAxios("/posts", { method: "get", params });
-
+const isExist = computed(() => posts.value && posts.value.length > 0);
 // pagination
 const totalCount = computed(() => response.value.headers["x-total-count"]);
 const pageCount = computed(() =>
