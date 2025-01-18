@@ -36,6 +36,11 @@
                 >Nested</router-link
               >
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" active-class="active" to="/my"
+                >Mypage</router-link
+              >
+            </li>
           </ul>
           <div class="d-flex" role="search">
             <button class="btn btn-outline-light" type="button" @click="goPage">
