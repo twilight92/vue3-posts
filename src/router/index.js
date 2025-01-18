@@ -76,6 +76,17 @@ const routes = [
     path: "/my",
     name: "MyPage",
     component: MyPage,
+    beforeEnter: (to, from) => {
+      console.log("to: ", to);
+      console.log("from: ", from);
+      // return false;
+      // return { name: "Home" };
+      // console.log(to.query);
+
+      if (Object.keys(to.query).length > 0) {
+        return { path: to.path, query: {} };
+      }
+    },
   },
 ];
 const router = createRouter({
