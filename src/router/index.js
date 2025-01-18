@@ -83,16 +83,4 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from) => {
-  console.log("to: ", to);
-  console.log("from: ", from);
-
-  if (to.name === "MyPage") {
-    // router.push({ name: "Home" });
-    // return false;
-    // return { name: "Home" };
-    return "/posts";
-  }
-});
-
 export default router;
