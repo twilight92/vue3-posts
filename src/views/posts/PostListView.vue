@@ -5,6 +5,7 @@
     <post-filter
       v-model:title="params.title_like"
       v-model:limit="params._limit"
+      @update:limit="changeLimit"
     />
 
     <hr class="my-4" />
@@ -74,6 +75,11 @@ const params = ref({
   _limit: 3,
   title_like: "",
 });
+
+const changeLimit = (value) => {
+  params.value._limit = value;
+  params.value._page = 1;
+};
 
 const {
   response,
