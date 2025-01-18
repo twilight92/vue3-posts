@@ -1,7 +1,7 @@
 <template>
   <app-card>
     <h5 class="card-title text-truncate">{{ title }}</h5>
-    <p class="card-text">{{ content }}</p>
+    <p class="card-text text-truncate">{{ content }}</p>
     <p class="text-muted">{{ createdDate }}</p>
     <template #footer>
       <div class="d-flex flex-row-reverse">
