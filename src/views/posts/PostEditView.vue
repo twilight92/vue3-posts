@@ -38,9 +38,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { getPostById, updatePost } from "@/api/posts";
 import PostForm from "@/components/posts/PostForm.vue";
 import { useAlert } from "@/composables/alert";
 import { useAxios } from "@/hooks/useAxios";
@@ -59,20 +57,27 @@ const goDetailPage = () => {
   });
 };
 
-const editError = ref(null);
-const editLoading = ref(false);
-const edit = async () => {
-  try {
-    editLoading.value = true;
-    await updatePost(id, { ...form.value });
-    router.push({ name: "PostDetail", params: { id } });
-    vSuccess("수정이 완료되었습니다");
-  } catch (err) {
-    vAlert(err.message);
-    editError.value = err;
-  } finally {
-    editLoading.value = false;
+const {
+  error: editError,
+  loading: editLoading,
+  execute,
+} = useAxios(
+  `/posts/${id}`,
+  { method: "patch" },
+  {
+    immediate: false,
+    onSuccess: () => {
+      router.push({ name: "PostDetail", params: { id } });
+      vSuccess("수정이 완료되었습니다");
+    },
+    onError: (err) => {
+      vAlert(err.message);
+    },
   }
+);
+
+const edit = async () => {
+  execute({ ...form.value });
 };
 </script>
 
